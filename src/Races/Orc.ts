@@ -1,6 +1,6 @@
-import Races from './Races';
+import Race from './Races';
 
-export default class Orc extends Races {
+export default class Orc extends Race {
   private _maxLife: number;
   private static _count = 0;
 
