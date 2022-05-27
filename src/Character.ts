@@ -16,9 +16,9 @@ export default class Character implements Fighter {
 
   constructor(name: string) {
     this._race = new Elf(name, 80);
-    this._archetype = new Mage('Helck');
+    this._archetype = new Mage(name);
     this._maxLifePoints = this._race.maxLifePoints / 2;
-    this._lifePoints = this._race.maxLifePoints;
+    this._lifePoints = this._maxLifePoints;
     this._strength = random(1, 10);
     this._defense = random(1, 10);
     this._dexterity = this._race.dexterity;
@@ -64,16 +64,16 @@ export default class Character implements Fighter {
     this.receiveDamage(enemy.strength);
   }
 
-  levelUp(): number {
+  levelUp(): void {
     this._defense += random(1, 10);
     this._dexterity += random(1, 10);
     this._strength += random(1, 10);
     this._maxLifePoints += random(1, 10);
     this._energy.amount = 10;
     if (this._maxLifePoints > this._race.maxLifePoints) {
-      return this._race.maxLifePoints;
+      this._maxLifePoints = this._race.maxLifePoints;
     }
-    return this._maxLifePoints;
+    this._lifePoints = this._maxLifePoints;
   }
 
   receiveDamage(attackPoints: number): number {
